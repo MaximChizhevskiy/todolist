@@ -1,36 +1,36 @@
 .App {
-  padding: 30px;
-  display: flex;
+    padding: 30px;
+    display: flex;
 }
 
 .App > div {
-  margin-right: 50px;
+    margin-right: 50px;
 }
 
 .isDone{
-  text-decoration: line-through;
-
+    text-decoration: line-through;
+    opacity: 0.5;
 }
 
 .notIsDone {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .activeFilter {
-  color: white;
-  font-weight: bold;
-  background-color: orangered;
-  border: 2px solid orangered;
-  border-radius: 3px;
-  outline-color: orangered;
+    color: white;
+    font-weight: bold;
+    background-color: orangered;
+    border: 2px solid orangered;
+    border-radius: 3px;
+    outline-color: orangered;
 }
 
 .inputError {
-  border: 3px solid orangered;
-  outline-color: orangered;
+    border: 3px solid orangered;
+    outline-color: orangered;
 }
 
 .errorMessage {
-  color: orangered;
-  padding: 0;
+    color: orangered;
+    padding: 0;
 }
