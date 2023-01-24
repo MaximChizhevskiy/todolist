@@ -1,8 +1,18 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {Button, IconButton, TextField} from "@mui/material";
+import {AddBox} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
     addItem: (titleTodolist: string) => void
 }
+
+const addButtonStyles = {
+    maxWidth: '30px',
+    maxHeight: '30px',
+    minWidth: '30px',
+    minHeight: '30px'
+}
+
 
 //Функция добавления тудулиста
 export function AddItemForm(props: AddItemFormPropsType) {
@@ -28,11 +38,16 @@ export function AddItemForm(props: AddItemFormPropsType) {
     return (
         <div>
             {/*Считываем значение с инпута и делаем его заголовком таски*/}
-            <input value={titleTask} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}
-                   className={error ? 'inputError' : ''}/>
+            <TextField variant={'outlined'}
+                       value={titleTask}
+                       onChange={onChangeHandler}
+                       onKeyDown={onKeyPressHandler}
+                       error={!!error}
+                       label={error ? 'Title is required' : 'Please type you title'}
+                       />
             {/* Добавления таски */}
-            <button onClick={addItem}>+</button>
-            {error && <div className={'errorMessage'}>{error}</div>}
+            <IconButton onClick={addItem} color={"primary"}
+                        style={addButtonStyles}><AddBox/></IconButton>
         </div>
     )
 }
