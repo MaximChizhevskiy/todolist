@@ -42,10 +42,10 @@ function App() {
 
     //------------------------------------
     // Фильтрация тасок со статусами на кнопках
-    function changeFilter(value: FilterValuesType, todolistId: string) {
+    function changeFilter(filter: FilterValuesType, todolistId: string) {
         let todolist = todolists.find(todolist => todolist.id === todolistId)
         if (todolist) {
-            todolist.filter = value
+            todolist.filter = filter
             setTodolists([...todolists])
         }
     }
@@ -94,13 +94,13 @@ function App() {
     //----------------------------------
     // Функция добавления тудулиста
     function addTodolist(titleTodolist: string) {
-        let todolist: TodolistsType = {
+        let newTodolist: TodolistsType = {
             id: v1(),
             filter: "all",
             titleTodolist: titleTodolist
         }
-        setTodolists([todolist, ...todolists])
-        setTasks({...tasksObj, [todolist.id]: []})
+        setTodolists([newTodolist, ...todolists])
+        setTasks({...tasksObj, [newTodolist.id]: []})
     }
 
     //----------------------------------
@@ -170,3 +170,4 @@ function App() {
 }
 
 export default App;
+
