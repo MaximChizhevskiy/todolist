@@ -71,8 +71,8 @@ function App() {
         }
     }
 
-//------------------------------------
-// Функция изменения статуса тайтла таски
+    //------------------------------------
+    // Функция изменения статуса тайтла таски
     function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
         let tasks = tasksObj[todolistId]
         let task = tasks.find(task => task.id === id)
