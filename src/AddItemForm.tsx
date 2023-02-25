@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {Button, IconButton, TextField} from "@mui/material";
+import {IconButton, TextField} from "@mui/material";
 import {AddBox} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
@@ -15,14 +15,17 @@ const addButtonStyles = {
 
 
 //Функция добавления тудулиста
-export function AddItemForm(props: AddItemFormPropsType) {
+export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+    console.log('AddItemForm called')
     let [titleTask, setTitleTask] = useState('')
     let [error, setError] = useState<string | null>(null)
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTitleTask(event.currentTarget.value)
     }
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (error !== null){
         setError(null)
+        }
         if (event.key === 'Enter') {
             addItem()
         }
@@ -50,4 +53,4 @@ export function AddItemForm(props: AddItemFormPropsType) {
                         style={addButtonStyles}><AddBox/></IconButton>
         </div>
     )
-}
+})
