@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react'
 import './App.css'
-import Todolist, {FilterValuesType, TasksStateType, TodolistsType} from "./Todolist";
+import Todolist, {FilterValuesType, TasksStateType} from "./Todolist";
 import {AddItemForm} from "./AddItemForm";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,15 +9,22 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Container, Grid, Paper} from "@mui/material";
-import {addTodolistAC, changeFilterAC, changeTitleTodolistAC, removeTodolistAC} from "./reducers/todolists-reducer";
+import {
+    addTodolistAC,
+    changeFilterAC,
+    changeTitleTodolistAC,
+    removeTodolistAC,
+    TodolistDomainType
+} from "./reducers/todolists-reducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./reducers/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./reducers/store";
+import {TaskStatuses, TodolistType} from "./api/todolist-api";
 
 function AppWithRedux() {
 
     const dispatch = useDispatch()
-    let todolists = useSelector<AppRootStateType, Array<TodolistsType>>(state => state.todolists)
+    let todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
     // Удаление тасок--------------------------
@@ -44,8 +51,8 @@ function AppWithRedux() {
     //------------------------------------
     // Функция изменения статуса таски (чекбокса)
 
-    const changeTaskStatus = useCallback((id: string, isDone: boolean, todolistId: string) => {
-        const action = changeTaskStatusAC(id, isDone, todolistId)
+    const changeTaskStatus = useCallback((id: string, status: TaskStatuses, todolistId: string) => {
+        const action = changeTaskStatusAC(id, status, todolistId)
         dispatch(action)
     }, [dispatch])
 
