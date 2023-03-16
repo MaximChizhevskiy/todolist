@@ -1,10 +1,12 @@
-import React, {useCallback} from "react";
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditebleSpan";
+import React, {useCallback, useEffect} from "react";
+import {AddItemForm} from "../../../components/AddItemForm/AddItemForm";
+import {EditableSpan} from "../../../components/EditableSpan/EditebleSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
-import {Task} from "./Task";
-import {TaskStatuses, TaskType} from "./api/todolist-api";
+import {Task} from "./Task/Task";
+import {TaskStatuses, TaskType} from "../../../api/todolist-api";
+import {fetchTasksTC} from "../tasks-reducer";
+import {useAppDispatch} from "../../../app/store";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TasksStateType = {
@@ -27,6 +29,12 @@ type TodolistPropsType = {
 
 const Todolist = React.memo((props: TodolistPropsType) => {
     console.log("Todolist called")
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchTasksTC(props.id))
+    }, [props.id])
 
     const onAllClickHandler = useCallback(() => {
         props.changeFilter('all', props.id)
@@ -66,8 +74,13 @@ const Todolist = React.memo((props: TodolistPropsType) => {
                 <ul>
                     {/* мапим таски с кнопками, чтобы не зависеть от количества приходящих тасок*/}
                     {tasksForTodolist.map((task) =>
-                        <Task task={task} removeTask={props.removeTask} changeTaskStatus={props.changeTaskStatus}
-                              changeTaskTitle={props.changeTaskTitle} todolistId={props.id} key={task.id}/>
+                        <Task
+                            task={task}
+                            removeTask={props.removeTask}
+                            changeTaskStatus={props.changeTaskStatus}
+                            changeTaskTitle={props.changeTaskTitle}
+                            todolistId={props.id}
+                            key={task.id}/>
                     )}
                 </ul>
                 <div>

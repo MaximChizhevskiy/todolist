@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {todolistAPI} from "../api/todolist-api";
+import {todolistAPI} from "./todolist-api";
 
 export default {
     title: 'API'
@@ -156,12 +156,34 @@ export const DeleteTask = () => {
 
 export const UpdateTask = () => {
     const [state, setState] = useState<any>(null)
+    const [stateIDsTodolists, setStateIDsTodolists] = useState<any>(null)
     const [todoId, setTodoId] = useState<string>('')
     const [taskId, setTaskId] = useState<string>('')
     const [newTitleTask, setNewTitleTask] = useState<string>('')
+    useEffect(() => {
+        todolistAPI.getTodolists().then((resp) => {
+            setStateIDsTodolists(resp.data.map((el) => el.id))
+        })
+    }, [])
+    useEffect(() => {
+        if (todoId) {
+
+        }
+    }, [todoId])
+    //get todolists => render
+
+    //get tasks for todolist => render
+
+    //input new title
 
     const updateTask = () => {
-        const promise = todolistAPI.updateTaskTitle(todoId, taskId, newTitleTask)
+        const promise = todolistAPI.updateTaskTitle(todoId, taskId, {
+            description: "string",
+            title: "string",
+            status: 0,
+            priority: 0,
+            startDate: "string",
+            deadline: "string"})
 
         promise.then((res) => {
             setState(res.data)
@@ -180,6 +202,11 @@ export const UpdateTask = () => {
             }}/>
             <button onClick={updateTask}>Update Task</button>
         </div>
+        {/*<div>
+            {stateIDsTodolists.map((el: any) => <button onClick={() =>{
+                setTodoId(el)
+            } }>{el}</button>)}
+        </div>*/}
     </div>
 }
 

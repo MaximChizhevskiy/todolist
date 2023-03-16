@@ -1,9 +1,9 @@
 import React, {ChangeEvent, useCallback} from "react";
 import {Checkbox, IconButton} from "@mui/material";
-import {EditableSpan} from "./EditebleSpan";
+import {EditableSpan} from "../../../../components/EditableSpan/EditebleSpan";
 import {Delete} from "@mui/icons-material";
 
-import {TaskStatuses, TaskType} from "./api/todolist-api";
+import {TaskStatuses, TaskType} from "../../../../api/todolist-api";
 
 type TaskPropsType = {
     changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
@@ -31,7 +31,7 @@ export const Task = (props: TaskPropsType) => {
                 color={'primary'}
                 checked={props.task.status === TaskStatuses.Completed}
                 onChange={onChangeHandler}/>
-            <EditableSpan titleTask={props.task.titleTask} onChange={onChangeEditTitleHandler}/>
+            <EditableSpan titleTask={props.task.title} onChange={onChangeEditTitleHandler}/>
             <IconButton onClick={onRemoveClickHandler}><Delete color={"disabled"}/></IconButton>
             {/*кол бек функция удаления таски по кнопки*/}
         </li>
