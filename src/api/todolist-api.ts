@@ -55,7 +55,7 @@ export type TaskType ={
     order: number
     addedDate: string
 }
-type ResponseType<T = {}> = {
+export type ResponseType<T = {}> = {
     fieldsErrors: string[]
     messages: string[]
     resultCode: number
@@ -66,7 +66,7 @@ type GetTasksResponseType = {
     totalCount: number
     items: TaskType[]
 }
-type TasksResponseType<T = {}> = {
+export type TasksResponseType<T = {}> = {
     resultCode: number
     messages: string[]
     data: T
@@ -83,6 +83,11 @@ export enum TaskPriorities {
     Hi,
     Urgently,
     Later
+}
+export enum ResultCode {
+    Ok,
+    Error,
+    Captcha
 }
 export type ChangeTaskModelType = {
     description: string

@@ -75,7 +75,7 @@ const Template1: ComponentStory<typeof Task> = (args) => {
     }
 
     return <Task changeTaskStatus={changeTaskStatus} changeTaskTitle={changeTaskTitle}
-                 removeTask={args.removeTask} task={task} todolistId={'todolistId'}/>
+                 removeTask={args.removeTask} task={task} todolistId={'todolistId'} entityStatus={'idle'}/>
 };
 
 export const TaskStory = Template1.bind({});

@@ -23,8 +23,8 @@ const TodolistsList: React.FC = (props) => {
     }, [])
 
     // Удаление тасок
-    const removeTask = useCallback((todolistId: string, id: string) => {
-        const thunk = removeTaskTC(todolistId, id)
+    const removeTask = useCallback((todolistId: string, id: string, cb?: () => void) => {
+        const thunk = removeTaskTC(todolistId, id, cb)
         dispatch(thunk)
     }, [dispatch])
 
@@ -88,6 +88,7 @@ const TodolistsList: React.FC = (props) => {
                                               id={todolist.id}
                                               tasks={tasksForTodolist}
                                               titleTodolist={todolist.title}
+                                              entityStatus={todolist.entityStatus}
                                               removeTask={removeTask}
                                               changeFilter={changeFilter}
                                               addTask={addTask}

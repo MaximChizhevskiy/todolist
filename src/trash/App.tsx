@@ -20,8 +20,8 @@ function App() {
 
     let [todolists, setTodolists] = useState<Array<TodolistDomainType>>(
         [
-            {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
-            {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 0},
+            {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0, entityStatus: "idle"},
+            {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 0, entityStatus: "idle"},
         ]
     )
 
@@ -154,7 +154,8 @@ function App() {
             filter: "all",
             title: title,
             addedDate: '',
-            order:0
+            order:0,
+            entityStatus: "idle"
         }
         setTodolists([newTodolist, ...todolists])
         setTasks({...tasksObj, [newTodolist.id]: []})
@@ -169,6 +170,8 @@ function App() {
             setTodolists([...todolists])
         }
     }
+
+
     return (
         <div className={'App'}>
             <AppBar position="static">
@@ -205,6 +208,7 @@ function App() {
                                     <Todolist key={todolist.id}
                                               id={todolist.id}
                                               tasks={tasksForTodolist}
+                                              entityStatus={todolist.entityStatus}
                                               titleTodolist={todolist.title}
                                               removeTask={removeTask}
                                               changeFilter={changeFilter}

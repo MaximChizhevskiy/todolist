@@ -7,6 +7,7 @@ import {Task} from "./Task/Task";
 import {TaskStatuses, TaskType} from "../../../api/todolist-api";
 import {fetchTasksTC} from "../tasks-reducer";
 import {useAppDispatch} from "../../../app/store";
+import {RequestStatusType} from "../../../app/api-reducer";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TasksStateType = {
@@ -16,15 +17,17 @@ export type TasksStateType = {
 type TodolistPropsType = {
     id: string
     titleTodolist: string,
+    entityStatus: RequestStatusType
     tasks: Array<TaskType>
     changeFilter: (value: FilterValuesType, todolistId: string) => void
     addTask: (titleTask: string, todolistId: string) => void
     changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
     changeTaskTitle: (id: string, newTitleTask: string, todolistId: string) => void
-    removeTask: (id: string, todolistId: string) => void
+    removeTask: (id: string, todolistId: string, cb?: () => void) => void
     filter: FilterValuesType
     removeTodolist: (todolistId: string) => void
     changeTitleTodolist: (todolistId: string, newTitle: string) => void
+
 }
 
 const Todolist = React.memo((props: TodolistPropsType) => {
@@ -67,10 +70,11 @@ const Todolist = React.memo((props: TodolistPropsType) => {
     return (
         <div className='App'>
             <div>
-                <h3><EditableSpan titleTask={props.titleTodolist} onChange={changeTitleTodolist}/>
-                    <IconButton onClick={removeTodolist}><Delete color={"disabled"}/></IconButton>
+                <h3><EditableSpan titleTask={props.titleTodolist} onChange={changeTitleTodolist} disabled={props.entityStatus === 'loading'}/>
+                    <IconButton onClick={removeTodolist} disabled={props.entityStatus === 'loading'}><Delete
+                        color={"disabled"}/></IconButton>
                 </h3>
-                <AddItemForm addItem={addTask}/>
+                <AddItemForm addItem={addTask} disabled={props.entityStatus === 'loading'}/>
                 <ul>
                     {/* мапим таски с кнопками, чтобы не зависеть от количества приходящих тасок*/}
                     {tasksForTodolist.map((task) =>
@@ -80,7 +84,9 @@ const Todolist = React.memo((props: TodolistPropsType) => {
                             changeTaskStatus={props.changeTaskStatus}
                             changeTaskTitle={props.changeTaskTitle}
                             todolistId={props.id}
-                            key={task.id}/>
+                            key={task.id}
+                            entityStatus={props.entityStatus}
+                            />
                     )}
                 </ul>
                 <div>

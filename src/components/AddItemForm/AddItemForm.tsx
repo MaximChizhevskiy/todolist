@@ -4,6 +4,7 @@ import {AddBox} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
     addItem: (titleTodolist: string) => void
+    disabled?: boolean
 }
 
 const addButtonStyles = {
@@ -47,10 +48,11 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                        onKeyDown={onKeyPressHandler}
                        error={!!error}
                        label={error ? 'Title is required' : 'Please type you title'}
+                       disabled={props.disabled}
                        />
             {/* Добавления таски */}
             <IconButton onClick={addItem} color={"primary"}
-                        style={addButtonStyles}><AddBox/></IconButton>
+                        style={addButtonStyles} disabled={props.disabled}><AddBox/></IconButton>
         </div>
     )
 })
