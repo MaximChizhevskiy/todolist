@@ -1,9 +1,32 @@
 import axios from 'axios'
+import {FormDataType} from "../features/Login/Login";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true
 })
+
+//auth
+export const authAPI = {
+    me() {
+        return instance.get<TasksResponseType<{userId: number}>>(`auth/me`)
+            .then(res => {
+                return res.data
+            })
+    },
+ logIn(data: FormDataType) {
+     return instance.post<TasksResponseType<{userId: number}>>(`auth/login`, data)
+         .then(res => {
+             return res.data
+         })
+ },
+    logOut() {
+        return instance.delete<TasksResponseType>(`auth/login`)
+            .then(res => {
+                return res.data
+            })
+    }
+}
 
 //api
 export const todolistAPI = {

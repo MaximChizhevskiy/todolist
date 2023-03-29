@@ -12,14 +12,18 @@ import {addTaskTC, changeTaskStatusTC, changeTaskTitleTC, removeTaskTC} from "./
 import {TaskStatuses} from "../../api/todolist-api";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
+import {Navigate} from "react-router-dom";
 
 const TodolistsList: React.FC = (props) => {
     const dispatch = useAppDispatch()
-    let todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists)
-    let tasks = useAppSelector<TasksStateType>(state => state.tasks)
+    const todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists)
+    const tasks = useAppSelector<TasksStateType>(state => state.tasks)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
     useEffect(() => {
-        dispatch(fetchTodolistTC())
+        if (isLoggedIn) {
+            dispatch(fetchTodolistTC())
+        }
     }, [])
 
     // Удаление тасок
@@ -70,6 +74,10 @@ const TodolistsList: React.FC = (props) => {
         const thunk = changeTodolistTitleTC(todolistId, newTitle)
         dispatch(thunk)
     }, [dispatch])
+
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'}/>
+    }
 
     return (
         <>
