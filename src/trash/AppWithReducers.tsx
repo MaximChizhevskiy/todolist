@@ -2,7 +2,7 @@ import React, {useReducer} from 'react'
 import '../app/App.css'
 import Todolist, {FilterValuesType} from "../features/TodolistsList/Todolist/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "../components/AddItemForm/AddItemForm";
+import {AddItemForm} from "components/AddItemForm/AddItemForm";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -10,15 +10,9 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Container, Grid, Paper} from "@mui/material";
-import {
-    addTodolistAC,
-    changeFilterAC,
-    changeTitleTodolistAC,
-    removeTodolistAC,
-    todolistsReducer
-} from "../features/TodolistsList/todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "../features/TodolistsList/tasks-reducer";
-import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
+import {todolistActions, todolistsReducer} from "features/TodolistsList/todolists-reducer";
+import {tasksAction, tasksReducer} from "features/TodolistsList/tasks-reducer";
+import {TaskPriorities, TaskStatuses} from "api/todolist-api";
 
 function AppWithReducers() {
     let todolistId1 = v1()
@@ -94,8 +88,8 @@ function AppWithReducers() {
     })
 
     // Удаление тасок--------------------------
-    function removeTask(id: string, todolistId: string) {
-        const action = removeTaskAC(id, todolistId)
+    function removeTask(taskId: string, todolistId: string) {
+        const action = tasksAction.removeTask({taskId, todolistId})
         dispatchToTasksReducer(action)
 
     }
@@ -103,15 +97,14 @@ function AppWithReducers() {
     //------------------------------------
     // Фильтрация тасок со статусами на кнопках
     function changeFilter(filter: FilterValuesType, todolistId: string) {
-        const action = changeFilterAC(todolistId, filter)
-        dispatchToTodolistsReducer(action)
+        dispatchToTodolistsReducer(todolistActions.changeFilter({filter, id: todolistId}))
     }
 
     //------------------------------------
     // Функция настройки добавления тасок
     function addTask(todolistId: string, title: string) {
-        const action = addTaskAC({
-            id: "id",
+        const action = tasksAction.addTask({
+        task: {id: "id",
             title: title,
             status: TaskStatuses.New,
             todoListId: todolistId,
@@ -120,29 +113,28 @@ function AppWithReducers() {
             addedDate: '',
             order: 0,
             priority: TaskPriorities.Low,
-            description: ''
+            description: ''}
         })
         dispatchToTasksReducer(action)
     }
 
     //------------------------------------
     // Функция изменения статуса таски (чекбокса)
-    function changeTaskStatus(id: string, status: TaskStatuses, todolistId: string) {
-        const action = changeTaskStatusAC(id, status, todolistId)
-        dispatchToTasksReducer(action)
+    function changeTaskStatus(taskId: string, status: TaskStatuses, todolistId: string) {
+        dispatchToTasksReducer(tasksAction.updateTask({taskId, model: {status}, todolistId}))
     }
 
     //------------------------------------
     // Функция изменения статуса тайтла таски
-    function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
-        const action = changeTaskTitleAC(todolistId, id, newTitle)
+    function changeTaskTitle(taskId: string, title: string, todolistId: string) {
+        const action = tasksAction.updateTask({taskId, model: {title}, todolistId})
         dispatchToTasksReducer(action)
     }
 
     //------------------------------------
     // Функция удаления тудулиста
     function removeTodolist(todolistId: string) {
-        const action = removeTodolistAC(todolistId)
+        const action = todolistActions.removeTodolist({id: todolistId})
         dispatchToTodolistsReducer(action)
         dispatchToTasksReducer(action)
     }
@@ -150,11 +142,11 @@ function AppWithReducers() {
     //----------------------------------
     // Функция добавления тудулиста
     function addTodolist(title: string) {
-        const action = addTodolistAC({
-            id: v1(),
+        const action = todolistActions.addTodolist({
+        todolist: {id: v1(),
             addedDate: "",
             order: 0,
-            title: title
+            title: title}
         })
         dispatchToTodolistsReducer(action)
         dispatchToTasksReducer(action)
@@ -163,7 +155,7 @@ function AppWithReducers() {
     //----------------------------------
     // Функция изменения тайтла тудулиста
     function changeTitleTodolist(todolistId: string, newTitle: string) {
-        const action = changeTitleTodolistAC(todolistId, newTitle)
+        const action = todolistActions.changeTitleTodolist({id: todolistId, title: newTitle})
         dispatchToTodolistsReducer(action)
     }
 

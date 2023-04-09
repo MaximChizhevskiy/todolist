@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {FormDataType} from "../features/Login/Login";
+import {FormDataType} from "features/Login/Login";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -61,8 +61,8 @@ export const todolistAPI = {
 
 //types
 export type TodolistType = {
-    addedDate: string
     id: string
+    addedDate: string
     order: number
     title: string
 }
@@ -113,10 +113,10 @@ export enum ResultCode {
     Captcha
 }
 export type ChangeTaskModelType = {
-    description: string
-    title: string
-    status: TaskStatuses
-    priority: TaskPriorities
-    startDate: string
-    deadline: string
+    description?: string
+    title?: string
+    status?: TaskStatuses
+    priority?: TaskPriorities
+    startDate?: string
+    deadline?: string
 }

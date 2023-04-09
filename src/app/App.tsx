@@ -9,11 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {CircularProgress, Container, LinearProgress} from "@mui/material";
 import TodolistsList from "../features/TodolistsList/TodolistsList";
 import {useAppDispatch, useAppSelector} from "./store";
-import {RequestStatusType} from "./api-reducer";
-import {CustomizedSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import {Login} from "../features/Login/Login";
+import {RequestStatusType} from "app/app-reducer";
+import {CustomizedSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
+import {Login} from "features/Login/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {logOut, meTC} from "../features/Login/auth-reducer";
+import {logOut, meTC} from "features/Login/auth-reducer";
 
 function App() {
     const dispatch = useAppDispatch()

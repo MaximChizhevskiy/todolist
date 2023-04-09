@@ -1,17 +1,17 @@
 import React, {useCallback, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../app/store";
+import {useAppDispatch, useAppSelector} from "app/store";
 import {
     addTodolistTC,
-    changeFilterAC, changeTodolistTitleTC,
+    changeTodolistTitleTC,
     fetchTodolistTC,
-    removeTodolistTC,
+    removeTodolistTC, todolistActions,
     TodolistDomainType
 } from "./todolists-reducer";
 import Todolist, {FilterValuesType, TasksStateType} from "./Todolist/Todolist";
 import {addTaskTC, changeTaskStatusTC, changeTaskTitleTC, removeTaskTC} from "./tasks-reducer";
-import {TaskStatuses} from "../../api/todolist-api";
+import {TaskStatuses} from "api/todolist-api";
 import {Grid, Paper} from "@mui/material";
-import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
+import {AddItemForm} from "components/AddItemForm/AddItemForm";
 import {Navigate} from "react-router-dom";
 
 const TodolistsList: React.FC = (props) => {
@@ -33,9 +33,8 @@ const TodolistsList: React.FC = (props) => {
     }, [dispatch])
 
     // Фильтрация тасок со статусами на кнопках
-    const changeFilter = useCallback((filter: FilterValuesType, todolistId: string) => {
-        const action = changeFilterAC(todolistId, filter)
-        dispatch(action)
+    const changeFilter = useCallback((filter: FilterValuesType, id: string) => {
+        dispatch(todolistActions.changeFilter({id, filter}))
     }, [dispatch])
 
 

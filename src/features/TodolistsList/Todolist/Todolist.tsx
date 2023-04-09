@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect} from "react";
-import {AddItemForm} from "../../../components/AddItemForm/AddItemForm";
-import {EditableSpan} from "../../../components/EditableSpan/EditebleSpan";
+import {AddItemForm} from "components/AddItemForm/AddItemForm";
+import {EditableSpan} from "components/EditableSpan/EditebleSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task/Task";
-import {TaskStatuses, TaskType} from "../../../api/todolist-api";
+import {TaskStatuses, TaskType} from "api/todolist-api";
 import {fetchTasksTC} from "../tasks-reducer";
-import {useAppDispatch} from "../../../app/store";
-import {RequestStatusType} from "../../../app/api-reducer";
+import {useAppDispatch} from "app/store";
+import {RequestStatusType} from "app/app-reducer";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TasksStateType = {
