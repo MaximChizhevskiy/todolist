@@ -5,6 +5,7 @@ import {FormDataType} from "./Login";
 import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {appActions} from "app/app-reducer";
+import {clearTasksAndTodolists} from "common/action/common.action";
 
 const initialState = {
     isLoggedIn: false,
@@ -69,7 +70,8 @@ export const logOut = () => async (dispatch: Dispatch) => {
     try {
         const res = await authAPI.logOut()
         if (res.resultCode === ResultCode.Ok) {
-            dispatch(authActions.setIsLoggedIn({isLoggedIn:false}))
+            dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
+            dispatch(clearTasksAndTodolists())
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
         } else {
             handleServerAppError(res, dispatch)
