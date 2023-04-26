@@ -8,12 +8,13 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {CircularProgress, Container, LinearProgress} from "@mui/material";
 import TodolistsList from "../features/TodolistsList/TodolistsList";
-import {useAppDispatch, useAppSelector} from "./store";
+import {useAppSelector} from "./store";
 import {RequestStatusType} from "app/app-reducer";
-import {CustomizedSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
+import {ErrorSnackbar} from "common/components/ErrorSnackbar/ErrorSnackbar";
 import {Login} from "features/Login/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {logOut, meTC} from "features/Login/auth-reducer";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
 
 function App() {
     const dispatch = useAppDispatch()
@@ -61,7 +62,7 @@ function App() {
                     <Route path='*' element={<Navigate to={'404'}/>}/>
                 </Routes>
             </Container>
-            <CustomizedSnackbar/>
+            <ErrorSnackbar/>
         </div>
     )
 }

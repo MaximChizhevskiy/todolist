@@ -2,7 +2,7 @@ import React, {useReducer} from 'react'
 import '../app/App.css'
 import Todolist, {FilterValuesType} from "../features/TodolistsList/Todolist/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "components/AddItemForm/AddItemForm";
+import {AddItemForm} from "common/components/AddItemForm/AddItemForm";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {Container, Grid, Paper} from "@mui/material";
 import {todolistActions, todolistsReducer} from "features/TodolistsList/todolists-reducer";
 import {tasksAction, tasksReducer} from "features/TodolistsList/tasks-reducer";
-import {TaskPriorities, TaskStatuses} from "api/todolist-api";
+import {TaskPriorities, TaskStatuses} from "common/enums/common-enums";
 
 function AppWithReducers() {
     let todolistId1 = v1()

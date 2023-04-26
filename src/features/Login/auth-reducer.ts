@@ -1,11 +1,12 @@
 import {Dispatch} from 'redux'
-
-import {authAPI, ResultCode} from "api/todolist-api";
 import {FormDataType} from "./Login";
-import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {appActions} from "app/app-reducer";
-import {clearTasksAndTodolists} from "common/action/common.action";
+import {clearTasksAndTodolists} from "common/action/common-actions";
+import {handleServerAppError, handleServerNetworkError} from "common/utils";
+import {authAPI} from "features/Login/auth-api";
+import {ResultCode} from "common/enums";
+
 
 const initialState = {
     isLoggedIn: false,
@@ -34,7 +35,7 @@ export const meTC = () => async (dispatch: Dispatch) => {
 
     try {
         const res = await authAPI.me()
-        if (res.resultCode === ResultCode.Ok) {
+        if (res.resultCode === ResultCode.Success) {
             dispatch(authActions.setIsLoggedIn({isLoggedIn:true}))
             dispatch(authActions.setInitialized({isInitialized: true}))
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
@@ -53,7 +54,7 @@ export const logInTC = (data: FormDataType) => async (dispatch: Dispatch) => {
 
     try {
         const res = await authAPI.logIn(data)
-        if (res.resultCode === ResultCode.Ok) {
+        if (res.resultCode === ResultCode.Success) {
             dispatch(authActions.setIsLoggedIn({isLoggedIn:true}))
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
         } else {
@@ -69,7 +70,7 @@ export const logOut = () => async (dispatch: Dispatch) => {
 
     try {
         const res = await authAPI.logOut()
-        if (res.resultCode === ResultCode.Ok) {
+        if (res.resultCode === ResultCode.Success) {
             dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
             dispatch(clearTasksAndTodolists())
             dispatch(appActions.setAppStatus({status: 'succeeded'}))

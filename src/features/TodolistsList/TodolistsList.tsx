@@ -1,18 +1,14 @@
 import React, {useCallback, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "app/store";
-import {
-    addTodolistTC,
-    changeTodolistTitleTC,
-    fetchTodolistTC,
-    removeTodolistTC, todolistActions,
-    TodolistDomainType
-} from "./todolists-reducer";
+import {useAppSelector} from "app/store";
+
 import Todolist, {FilterValuesType, TasksStateType} from "./Todolist/Todolist";
-import {addTaskTC, changeTaskStatusTC, changeTaskTitleTC, removeTaskTC} from "./tasks-reducer";
-import {TaskStatuses} from "api/todolist-api";
+import {tasksThunks} from "./tasks-reducer";
 import {Grid, Paper} from "@mui/material";
-import {AddItemForm} from "components/AddItemForm/AddItemForm";
 import {Navigate} from "react-router-dom";
+import {AddItemForm} from "common/components";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {TaskStatuses} from "common/enums/common-enums";
+import {todolistActions, TodolistDomainType, todolistsThunks} from "./todolists-reducer";
 
 const TodolistsList: React.FC = (props) => {
     const dispatch = useAppDispatch()
@@ -22,14 +18,13 @@ const TodolistsList: React.FC = (props) => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            dispatch(fetchTodolistTC())
+            dispatch(todolistsThunks.fetchTodolists())
         }
     }, [])
 
     // Удаление тасок
-    const removeTask = useCallback((todolistId: string, id: string, cb?: () => void) => {
-        const thunk = removeTaskTC(todolistId, id, cb)
-        dispatch(thunk)
+    const removeTask = useCallback((todolistId: string, taskId: string) => {
+        dispatch(tasksThunks.removeTaskTC({todolistId, taskId}))
     }, [dispatch])
 
     // Фильтрация тасок со статусами на кнопках
@@ -40,38 +35,32 @@ const TodolistsList: React.FC = (props) => {
 
     // Функция настройки добавления тасок
     const addTask = useCallback((title: string, todolistId: string) => {
-        const thunk = addTaskTC(title, todolistId)
-        dispatch(thunk)
+        dispatch(tasksThunks.addTaskTC({title, todolistId}))
     }, [dispatch])
 
     // Функция изменения статуса таски (чекбокса)
     const changeTaskStatus = useCallback((taskId: string, status: TaskStatuses, todolistId: string) => {
-        const thunk = changeTaskStatusTC(taskId, status, todolistId)
-        dispatch(thunk)
+        dispatch(tasksThunks.changeTaskTC({taskId, domainModel: {status}, todolistId}))
     }, [dispatch])
 
     // Функция изменения статуса тайтла таски
-    const changeTaskTitle = useCallback((id: string, newTitle: string, todolistId: string) => {
-        const thunk = changeTaskTitleTC(todolistId, id, newTitle)
-        dispatch(thunk)
+    const changeTaskTitle = useCallback((taskId: string, title: string, todolistId: string) => {
+        dispatch(tasksThunks.changeTaskTC({taskId, domainModel: {title}, todolistId}))
     }, [dispatch])
 
     // Функция удаления тудулиста
     const removeTodolist = useCallback((todolistId: string) => {
-        const thunk = removeTodolistTC(todolistId)
-        dispatch(thunk)
+        dispatch(todolistsThunks.removeTodolist(todolistId))
     }, [dispatch])
 
     // Функция добавления тудулиста
     const addTodolist = useCallback((title: string) => {
-        const action = addTodolistTC(title)
-        dispatch(action)
+        dispatch(todolistsThunks.addTodolist(title))
     }, [dispatch])
 
     // Функция изменения тайтла тудулиста
-    const changeTitleTodolist = useCallback((todolistId: string, newTitle: string) => {
-        const thunk = changeTodolistTitleTC(todolistId, newTitle)
-        dispatch(thunk)
+    const changeTitleTodolist = useCallback((todolistId: string, title: string) => {
+        dispatch(todolistsThunks.changeTodolistTitle({todolistId, title}))
     }, [dispatch])
 
     if (!isLoggedIn) {

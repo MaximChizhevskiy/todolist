@@ -1,13 +1,14 @@
 import React, {useCallback, useEffect} from "react";
-import {AddItemForm} from "components/AddItemForm/AddItemForm";
-import {EditableSpan} from "components/EditableSpan/EditebleSpan";
+import {AddItemForm} from "common/components/AddItemForm/AddItemForm";
+import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task/Task";
-import {TaskStatuses, TaskType} from "api/todolist-api";
-import {fetchTasksTC} from "../tasks-reducer";
-import {useAppDispatch} from "app/store";
 import {RequestStatusType} from "app/app-reducer";
+import {tasksThunks} from "features/TodolistsList/tasks-reducer";
+import {TaskStatuses} from "common/enums/common-enums";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {TaskType} from "features/TodolistsList/todolists-api";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TasksStateType = {
@@ -23,7 +24,7 @@ type TodolistPropsType = {
     addTask: (titleTask: string, todolistId: string) => void
     changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
     changeTaskTitle: (id: string, newTitleTask: string, todolistId: string) => void
-    removeTask: (id: string, todolistId: string, cb?: () => void) => void
+    removeTask: (id: string, todolistId: string) => void
     filter: FilterValuesType
     removeTodolist: (todolistId: string) => void
     changeTitleTodolist: (todolistId: string, newTitle: string) => void
@@ -36,7 +37,7 @@ const Todolist = React.memo((props: TodolistPropsType) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchTasksTC(props.id))
+        dispatch(tasksThunks.fetchTasks(props.id))
     }, [props.id])
 
     const onAllClickHandler = useCallback(() => {
@@ -59,7 +60,11 @@ const Todolist = React.memo((props: TodolistPropsType) => {
     const addTask = useCallback((titleTask: string) => {
         props.addTask(titleTask, props.id)
     }, [props.addTask, props.id])
-    let tasksForTodolist = props.tasks
+
+    let tasksForTodolist = [] as Array<TaskType>
+    if (props.tasks) {
+        tasksForTodolist = props.tasks
+    }
 
     if (props.filter === 'active') {
         tasksForTodolist = props.tasks.filter(task => task.status === TaskStatuses.New)

@@ -1,15 +1,16 @@
 import React, {ChangeEvent, useCallback, useState} from "react";
 import {Checkbox, IconButton} from "@mui/material";
-import {EditableSpan} from "components/EditableSpan/EditebleSpan";
+import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import {Delete} from "@mui/icons-material";
 
-import {TaskStatuses, TaskType} from "api/todolist-api";
 import {RequestStatusType} from "app/app-reducer";
+import {TaskStatuses} from "common/enums/common-enums";
+import {TaskType} from "features/TodolistsList/todolists-api";
 
 type TaskPropsType = {
     changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
     changeTaskTitle: (id: string, newTitleTask: string, todolistId: string) => void
-    removeTask: (id: string, todolistId: string, cb?: () => void) => void
+    removeTask: (id: string, todolistId: string) => void
     task: TaskType
     todolistId: string
     entityStatus: RequestStatusType
@@ -17,13 +18,9 @@ type TaskPropsType = {
 export const Task = (props: TaskPropsType) => {
     const [isDisabled, setIsDisable] =useState(false)
 
-    const resetIsDisabled = () => {
-        setIsDisable(false)
-    }
-
     const onRemoveClickHandler = () => {
         setIsDisable(true)
-        props.removeTask(props.task.id, props.todolistId, resetIsDisabled)
+        props.removeTask( props.todolistId,props.task.id)
     }
     // Изменение статуса таски
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {

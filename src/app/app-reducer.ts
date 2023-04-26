@@ -4,10 +4,11 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 const initialState = {
     status: 'loading' as RequestStatusType,
-    error: null as null | string
+    error: null as null | string,
+    isInitialized: false
 }
 
-type AppInitialStateType = typeof initialState
+export type AppInitialStateType = typeof initialState
 
 const slice = createSlice({
     name: 'app',

@@ -5,9 +5,9 @@ import {applyMiddleware, combineReducers, legacy_createStore} from 'redux'
 import {v1} from 'uuid'
 import {tasksReducer} from "features/TodolistsList/tasks-reducer";
 import {todolistsReducer} from "features/TodolistsList/todolists-reducer";
-import {TaskPriorities, TaskStatuses} from "api/todolist-api";
 import {appReducer} from "app/app-reducer";
 import thunk from "redux-thunk";
+import {TaskPriorities, TaskStatuses} from "common/enums/common-enums";
 
 
 const rootReducer = combineReducers({
