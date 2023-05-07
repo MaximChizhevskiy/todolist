@@ -15,10 +15,11 @@ type TaskPropsType = {
     todolistId: string
     entityStatus: RequestStatusType
 }
+
 export const Task = (props: TaskPropsType) => {
     const [isDisabled, setIsDisable] =useState(false)
 
-    const onRemoveClickHandler = () => {
+      const onRemoveClickHandler = () => {
         setIsDisable(true)
         props.removeTask( props.todolistId,props.task.id)
     }
@@ -29,7 +30,7 @@ export const Task = (props: TaskPropsType) => {
     }
     const onChangeEditTitleHandler = useCallback((newValue: string) => {
         props.changeTaskTitle(props.task.id, newValue, props.todolistId)
-    }, [props.task.id, props.changeTaskTitle, props.todolistId])
+    },[props.task.id, props.changeTaskTitle, props.todolistId])
 
     return (
         <li key={props.task.id} className={props.task.status === TaskStatuses.Completed ? 'isDone' : 'notIsDone'}>

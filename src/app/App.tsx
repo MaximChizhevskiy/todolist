@@ -13,17 +13,18 @@ import {RequestStatusType} from "app/app-reducer";
 import {ErrorSnackbar} from "common/components/ErrorSnackbar/ErrorSnackbar";
 import {Login} from "features/Login/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {logOut, meTC} from "features/Login/auth-reducer";
-import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {authThunks} from "features/Login/auth-reducer";
+import {useActions} from "common/hooks";
 
 function App() {
-    const dispatch = useAppDispatch()
+    const {initializeApp, logOut} = useActions(authThunks)
+
     const status = useAppSelector<RequestStatusType>((state) => state.app.status)
     const isInitialized = useAppSelector<boolean>((state) => state.auth.isInitialized)
     const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn)
 
     useEffect(() => {
-       dispatch(meTC())
+        initializeApp()
     }, [])
 
     if (!isInitialized) {
@@ -33,9 +34,7 @@ function App() {
         </div>
     }
 
-    const logOutHandler = () => {
-      dispatch(logOut())
-    }
+    const logOutHandler = () => logOut()
 
     return (
         <div className={'App'}>

@@ -28,7 +28,6 @@ type TodolistPropsType = {
     filter: FilterValuesType
     removeTodolist: (todolistId: string) => void
     changeTitleTodolist: (todolistId: string, newTitle: string) => void
-
 }
 
 const Todolist = React.memo((props: TodolistPropsType) => {
@@ -38,28 +37,28 @@ const Todolist = React.memo((props: TodolistPropsType) => {
 
     useEffect(() => {
         dispatch(tasksThunks.fetchTasks(props.id))
-    }, [props.id])
+    },[props.id])
 
     const onAllClickHandler = useCallback(() => {
         props.changeFilter('all', props.id)
-    }, [props.changeFilter, props.id])
+    },[props.changeFilter, props.id])
     const onActiveClickHandler = useCallback(() => {
         props.changeFilter('active', props.id)
-    }, [props.changeFilter, props.id])
+    },[props.changeFilter, props.id])
     const onCompletedClickHandler = useCallback(() => {
         props.changeFilter('completed', props.id)
-    }, [props.changeFilter, props.id])
+    },[props.changeFilter, props.id])
 
     const removeTodolist = () => {
         props.removeTodolist(props.id)
     }
     const changeTitleTodolist = useCallback((newTitle: string) => {
         props.changeTitleTodolist(props.id, newTitle)
-    }, [props.id, props.changeTitleTodolist])
+    },[props.id, props.changeTitleTodolist])
 
     const addTask = useCallback((titleTask: string) => {
         props.addTask(titleTask, props.id)
-    }, [props.addTask, props.id])
+    },[props.addTask, props.id])
 
     let tasksForTodolist = [] as Array<TaskType>
     if (props.tasks) {

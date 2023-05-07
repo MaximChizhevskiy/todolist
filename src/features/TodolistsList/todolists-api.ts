@@ -19,13 +19,13 @@ export const todolistAPI = {
         return instance.get<GetTasksResponseType>(`todo-lists/${todoId}/tasks`)
     },
     createTask(arg:AddTaskArgType) {
-        return instance.post<TasksResponseType<{item: TaskType}>>(`todo-lists/${arg.todolistId}/tasks`, {title: arg.title})
+        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${arg.todolistId}/tasks`, {title: arg.title})
     },
     changeTask(todoId: string, taskId: string, model: ChangeTaskModelType) {
-        return instance.put<TasksResponseType<TaskType>>(`todo-lists/${todoId}/tasks/${taskId}`, model)
+        return instance.put<ResponseType<TaskType>>(`todo-lists/${todoId}/tasks/${taskId}`, model)
     },
     deleteTask(arg: RemoveTaskArgType) {
-        return instance.delete<TasksResponseType>(`todo-lists/${arg.todolistId}/tasks/${arg.taskId}`)
+        return instance.delete<ResponseType>(`todo-lists/${arg.todolistId}/tasks/${arg.taskId}`)
     }
 }
 
@@ -54,12 +54,6 @@ export type GetTasksResponseType = {
     totalCount: number
     items: TaskType[]
 }
-export type TasksResponseType<T = {}> = {
-    resultCode: number
-    messages: string[]
-    data: T
-}
-
 export type ChangeTaskModelType = {
     description?: string
     title?: string
