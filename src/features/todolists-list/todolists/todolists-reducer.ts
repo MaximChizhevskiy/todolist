@@ -1,14 +1,14 @@
-import {FilterValuesType} from "./Todolist/Todolist";
+import {FilterValuesType} from "features/todolists-list/todolists/Todolist/Todolist";
 import {appActions, RequestStatusType} from "app/app-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {clearTasksAndTodolists} from "common/action/common-actions";
-import {todolistAPI, TodolistType, UpdateTodolistTitleArgType} from "features/TodolistsList/todolists-api";
+import {todolistAPI, TodolistType, UpdateTodolistTitleArgType} from "features/todolists-list/todolists/todolists-api";
 import {ResultCode} from "common/enums";
 import {createAppAsyncThunk, handleServerAppError} from "common/utils";
 import {thunkTryCatch} from "common/utils/thunk-try-catch";
 
 const fetchTodolists = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
-('todolist/fetchTodolists', async (_, thunkAPI) => {
+('Todolist/fetchTodolists', async (_, thunkAPI) => {
     const {dispatch} = thunkAPI
     return thunkTryCatch(thunkAPI, async () => {
         dispatch(appActions.setAppStatus({status: 'loading'}))

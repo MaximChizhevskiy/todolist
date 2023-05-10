@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {todolistAPI} from "features/TodolistsList/todolists-api";
+import {todolistAPI} from "features/todolists-list/todolists/todolists-api";
 
 export default {
     title: 'API'
@@ -74,7 +74,7 @@ export const UpdateTodolistTitle = () => {
     return <div>{JSON.stringify(state)}
         <div>
             <input placeholder={"todoId"} value={todolistId} onChange={e => setTolistId(e.currentTarget.value)}/>
-            <input placeholder={"New title todolist"} value={title}
+            <input placeholder={"New title Todolist"} value={title}
                    onChange={e => setNewTitleTodolist(e.currentTarget.value)}/>
             <button onClick={updateTodolistTitle}>Update todolist title</button>
         </div>
@@ -172,7 +172,7 @@ export const UpdateTask = () => {
     }, [todolistId])
     //get todolists => render
 
-    //get tasks for todolist => render
+    //get tasks for Todolist => render
 
     //input new title
 

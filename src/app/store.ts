@@ -1,10 +1,10 @@
-import {tasksReducer} from 'features/TodolistsList/tasks-reducer'
-import {todolistsReducer} from 'features/TodolistsList/todolists-reducer'
+import {tasksReducer} from 'features/todolists-list/tasks/tasks-reducer'
+import {todolistsReducer} from 'features/todolists-list/todolists/todolists-reducer'
 import {AnyAction, applyMiddleware, combineReducers, legacy_createStore} from 'redux'
 import thunk, {ThunkDispatch} from "redux-thunk";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {appReducer} from "app/app-reducer";
-import {authReducer} from "features/Login/auth-reducer";
+import {authReducer} from "features/login/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 
 // объединяя reducer-ы с помощью combineReducers,

@@ -1,7 +1,7 @@
-import {tasksAction, tasksReducer, tasksThunks} from './tasks-reducer'
-import {TasksStateType} from "./Todolist/Todolist";
+import {tasksAction, tasksReducer, tasksThunks} from 'features/todolists-list/tasks/tasks-reducer'
+import {TasksStateType} from "features/todolists-list/todolists/Todolist/Todolist";
 import {v1} from "uuid";
-import {todolistActions} from "features/TodolistsList/todolists-reducer";
+import {todolistActions} from "features/todolists-list/todolists/todolists-reducer";
 import {TaskPriorities, TaskStatuses} from 'common/enums';
 
 
@@ -160,7 +160,7 @@ test('Title of title task should be changed', () => {
     expect(endState['todolistId1'][0].title).toBe('CSS')
 })
 
-test('new array should be added when new todolist is added', () => {
+test('new array should be added when new Todolist is added', () => {
     const action = todolistActions.addTodolist({
     todolist: {id: v1(),
         addedDate: "",
@@ -205,7 +205,7 @@ test('empty arrays should be added when we set todolists', () => {
     expect(endState['2']).toBeDefined()
 })
 
-test('tasks should be added for todolist', () => {
+test('tasks should be added for Todolist', () => {
     const action = tasksThunks.fetchTasks.fulfilled({
         tasks: startState['todolistId1'],
         todolistId: 'todolistId1'}, 'requestId', 'todolistId1');

@@ -3,8 +3,8 @@ import {Provider} from "react-redux";
 import {store} from "app/store";
 import {applyMiddleware, combineReducers, legacy_createStore} from 'redux'
 import {v1} from 'uuid'
-import {tasksReducer} from "features/TodolistsList/tasks-reducer";
-import {todolistsReducer} from "features/TodolistsList/todolists-reducer";
+import {tasksReducer} from "features/todolists-list/tasks/tasks-reducer";
+import {todolistsReducer} from "features/todolists-list/todolists/todolists-reducer";
 import {appReducer} from "app/app-reducer";
 import thunk from "redux-thunk";
 import {TaskPriorities, TaskStatuses} from "common/enums/common-enums";

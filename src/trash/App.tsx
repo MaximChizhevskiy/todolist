@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import '../app/App.css'
-import Todolist, {FilterValuesType, TasksStateType} from "../features/TodolistsList/Todolist/Todolist";
+import Todolist, {FilterValuesType, TasksStateType} from "../features/todolists-list/todolists/Todolist/Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "../common/components/AddItemForm/AddItemForm";
 import AppBar from '@mui/material/AppBar';
@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Container, Grid, Paper} from "@mui/material";
-import {TodolistDomainType} from "../features/TodolistsList/todolists-reducer";
+import {TodolistDomainType} from "features/todolists-list/todolists/todolists-reducer";
 import {TaskPriorities, TaskStatuses} from "common/enums/common-enums";
 
 function App() {

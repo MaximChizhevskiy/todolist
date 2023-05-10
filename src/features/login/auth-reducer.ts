@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {appActions} from "app/app-reducer";
 import {clearTasksAndTodolists} from "common/action/common-actions";
 import {createAppAsyncThunk, handleServerAppError, handleServerNetworkError} from "common/utils";
-import {authAPI} from "features/Login/auth-api";
+import {authAPI} from "features/login/auth-api";
 import {ResultCode} from "common/enums";
 import {thunkTryCatch} from "common/utils/thunk-try-catch";
 

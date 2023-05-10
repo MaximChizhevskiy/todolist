@@ -1,4 +1,4 @@
-import {FormDataType} from "features/Login/Login";
+import {FormDataType} from "features/login/Login";
 import {instance} from "api/common-api";
 import {ResponseType} from "common/types/common-types"
 

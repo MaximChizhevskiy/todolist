@@ -7,24 +7,25 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {CircularProgress, Container, LinearProgress} from "@mui/material";
-import TodolistsList from "../features/TodolistsList/TodolistsList";
+import TodolistsList from "../features/todolists-list/TodolistsList";
 import {useAppSelector} from "./store";
 import {RequestStatusType} from "app/app-reducer";
 import {ErrorSnackbar} from "common/components/ErrorSnackbar/ErrorSnackbar";
-import {Login} from "features/Login/Login";
+import {Login} from "features/login/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {authThunks} from "features/Login/auth-reducer";
+import {authThunks} from "features/login/auth-reducer";
 import {useActions} from "common/hooks";
+import {selectIsLoggedIn} from "features/login/auth-selectors";
 
 function App() {
     const {initializeApp, logOut} = useActions(authThunks)
 
     const status = useAppSelector<RequestStatusType>((state) => state.app.status)
     const isInitialized = useAppSelector<boolean>((state) => state.auth.isInitialized)
-    const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn)
+    const isLoggedIn = useAppSelector<boolean>(selectIsLoggedIn)
 
     useEffect(() => {
-        initializeApp()
+        initializeApp({})
     }, [])
 
     if (!isInitialized) {
@@ -34,7 +35,7 @@ function App() {
         </div>
     }
 
-    const logOutHandler = () => logOut()
+    const logOutHandler = () => logOut({})
 
     return (
         <div className={'App'}>

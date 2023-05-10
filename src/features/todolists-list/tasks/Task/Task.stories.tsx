@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {Task} from "./Task";
+import {Task} from "features/todolists-list/tasks/Task/Task";
 import {action} from "@storybook/addon-actions";
 import {TaskPriorities, TaskStatuses} from "common/enums/common-enums";
 

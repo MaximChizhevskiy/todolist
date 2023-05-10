@@ -3,12 +3,12 @@ import {AddItemForm} from "common/components/AddItemForm/AddItemForm";
 import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
-import {Task} from "./Task/Task";
+import {Task} from "features/todolists-list/tasks/Task/Task";
 import {RequestStatusType} from "app/app-reducer";
-import {tasksThunks} from "features/TodolistsList/tasks-reducer";
+import {tasksThunks} from "features/todolists-list/tasks/tasks-reducer";
 import {TaskStatuses} from "common/enums/common-enums";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
-import {TaskType} from "features/TodolistsList/todolists-api";
+import {TaskType} from "features/todolists-list/todolists/todolists-api";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TasksStateType = {
@@ -35,7 +35,7 @@ const Todolist = React.memo((props: TodolistPropsType) => {
 
     const dispatch = useAppDispatch()
 
-    useEffect(() => {
+       useEffect(() => {
         dispatch(tasksThunks.fetchTasks(props.id))
     },[props.id])
 
