@@ -8,9 +8,9 @@ import {TaskPriorities, TaskStatuses} from "common/enums/common-enums";
 export default {
     title: 'TODOLISTS/Task',
     args: {
-        changeTaskStatus: action('changeTaskStatus'),
-        changeTaskTitle: action('changeTaskTitle'),
-        removeTask: action('removeTask'),
+        //changeTaskStatus: action('changeTaskStatus'),
+        //changeTaskTitle: action('changeTaskTitle'),
+        //removeTask: action('removeTask'),
         todolistId: 'to1234',
         task: {id: '', title: 'JS', status: TaskStatuses.New}
     },
@@ -74,11 +74,16 @@ const Template1: ComponentStory<typeof Task> = (args) => {
         console.log('removeTask')
     }
 
-    return <Task changeTaskStatus={changeTaskStatus} changeTaskTitle={changeTaskTitle}
-                 removeTask={args.removeTask} task={task} todolistId={'todolistId'} entityStatus={'idle'}/>
+    return <Task
+        //changeTaskStatus={changeTaskStatus}
+        //changeTaskTitle={changeTaskTitle}
+                 //removeTask={args.removeTask}
+                 task={task}
+                 todolistId={'todolistId'}
+                 entityStatus={'idle'}/>
 };
 
 export const TaskStory = Template1.bind({});
 TaskStory.args = {
-    removeTask: action('removeTask')
+    //removeTask: action('removeTask')
 }

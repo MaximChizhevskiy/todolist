@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {IconButton, TextField} from "@mui/material";
 import {AddBox} from "@mui/icons-material";
 
-type AddItemFormPropsType = {
+type Props = {
     addItem: (titleTodolist: string) => void
     disabled?: boolean
 }
@@ -16,7 +16,7 @@ const addButtonStyles = {
 
 
 //Функция добавления тудулиста
-export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo((props: Props) => {
     console.log('AddItemForm called')
     let [titleTask, setTitleTask] = useState('')
     let [error, setError] = useState<string | null>(null)

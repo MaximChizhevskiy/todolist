@@ -197,11 +197,8 @@ function AppWithReducers() {
                                               tasks={tasksForTodolist}
                                               titleTodolist={todolist.title}
                                               entityStatus={todolist.entityStatus}
-                                              removeTask={removeTask}
                                               changeFilter={changeFilter}
                                               addTask={addTask}
-                                              changeTaskStatus={changeTaskStatus}
-                                              changeTaskTitle={changeTaskTitle}
                                               filter={todolist.filter}
                                               removeTodolist={removeTodolist}
                                               changeTitleTodolist={changeTitleTodolist}

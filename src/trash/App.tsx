@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import '../app/App.css'
 import Todolist, {FilterValuesType, TasksStateType} from "../features/todolists-list/todolists/Todolist/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "../common/components/AddItemForm/AddItemForm";
+import {AddItemForm} from "common/components";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -210,11 +210,8 @@ function App() {
                                               tasks={tasksForTodolist}
                                               entityStatus={todolist.entityStatus}
                                               titleTodolist={todolist.title}
-                                              removeTask={removeTask}
                                               changeFilter={changeFilter}
                                               addTask={addTask}
-                                              changeTaskStatus={changeTaskStatus}
-                                              changeTaskTitle={changeTaskTitle}
                                               filter={todolist.filter}
                                               removeTodolist={removeTodolist}
                                               changeTitleTodolist={changeTitleTodolist}

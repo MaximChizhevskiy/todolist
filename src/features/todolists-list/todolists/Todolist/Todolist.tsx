@@ -8,7 +8,7 @@ import {RequestStatusType} from "app/app-reducer";
 import {tasksThunks} from "features/todolists-list/tasks/tasks-reducer";
 import {TaskStatuses} from "common/enums/common-enums";
 import {useAppDispatch} from "common/hooks/useAppDispatch";
-import {TaskType} from "features/todolists-list/todolists/todolists-api";
+import {TaskType} from "features/todolists-list/tasks/tasks-api";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TasksStateType = {
@@ -22,9 +22,6 @@ type TodolistPropsType = {
     tasks: Array<TaskType>
     changeFilter: (value: FilterValuesType, todolistId: string) => void
     addTask: (titleTask: string, todolistId: string) => void
-    changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
-    changeTaskTitle: (id: string, newTitleTask: string, todolistId: string) => void
-    removeTask: (id: string, todolistId: string) => void
     filter: FilterValuesType
     removeTodolist: (todolistId: string) => void
     changeTitleTodolist: (todolistId: string, newTitle: string) => void
@@ -84,9 +81,6 @@ const Todolist = React.memo((props: TodolistPropsType) => {
                     {tasksForTodolist.map((task) =>
                         <Task
                             task={task}
-                            removeTask={props.removeTask}
-                            changeTaskStatus={props.changeTaskStatus}
-                            changeTaskTitle={props.changeTaskTitle}
                             todolistId={props.id}
                             key={task.id}
                             entityStatus={props.entityStatus}

@@ -5,8 +5,11 @@ import {tasksThunks} from "features/todolists-list/tasks/tasks-reducer";
 import {Grid, Paper} from "@mui/material";
 import {Navigate} from "react-router-dom";
 import {AddItemForm} from "common/components";
-import {TaskStatuses} from "common/enums/common-enums";
-import {todolistActions, TodolistDomainType, todolistsThunks} from "features/todolists-list/todolists/todolists-reducer";
+import {
+    todolistActions,
+    TodolistDomainType,
+    todolistsThunks
+} from "features/todolists-list/todolists/todolists-reducer";
 import {useActions} from "common/hooks";
 import {selectTasks} from "features/todolists-list/tasks/tasks-selectors";
 import {selectIsLoggedIn} from "features/login/auth-selectors";
@@ -21,7 +24,7 @@ const TodolistsList: React.FC = () => {
     const {removeTodolist: removeTodolistThunk, addTodolist: addTodolistThunk, fetchTodolists,
         changeTodolistTitle: changeTodolistTitleThunk} = useActions(todolistsThunks)
 
-    const {removeTaskTC: removeTaskThunk, addTaskTC: addTaskThunk, changeTaskTC: changeTaskThunk} = useActions(tasksThunks)
+    const {addTaskTC: addTaskThunk} = useActions(tasksThunks)
     const {changeFilter: changeFilterThunk} = useActions(todolistActions)
 
     useEffect(() => {
@@ -30,30 +33,14 @@ const TodolistsList: React.FC = () => {
         }
     }, [])
 
-    // Удаление тасок
-    const removeTask = useCallback((todolistId: string, taskId: string) => {
-        removeTaskThunk({todolistId, taskId})
-    }, [])
-
     // Фильтрация тасок со статусами на кнопках
     const changeFilter = useCallback((filter: FilterValuesType, id: string) => {
         changeFilterThunk({id, filter})
     }, [])
 
-
     // Функция настройки добавления тасок
     const addTask = useCallback((title: string, todolistId: string) => {
         addTaskThunk({title, todolistId})
-    }, [])
-
-    // Функция изменения статуса таски (чекбокса)
-    const changeTaskStatus = useCallback((taskId: string, status: TaskStatuses, todolistId: string) => {
-        changeTaskThunk({taskId, domainModel: {status}, todolistId})
-    }, [])
-
-    // Функция изменения статуса тайтла таски
-    const changeTaskTitle = useCallback((taskId: string, title: string, todolistId: string) => {
-        changeTaskThunk({taskId, domainModel: {title}, todolistId})
     }, [])
 
     // Функция удаления тудулиста
@@ -93,11 +80,8 @@ const TodolistsList: React.FC = () => {
                                               tasks={tasksForTodolist}
                                               titleTodolist={todolist.title}
                                               entityStatus={todolist.entityStatus}
-                                              removeTask={removeTask}
                                               changeFilter={changeFilter}
                                               addTask={addTask}
-                                              changeTaskStatus={changeTaskStatus}
-                                              changeTaskTitle={changeTaskTitle}
                                               filter={todolist.filter}
                                               removeTodolist={removeTodolist}
                                               changeTitleTodolist={changeTitleTodolist}

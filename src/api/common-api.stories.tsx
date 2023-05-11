@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {todolistAPI} from "features/todolists-list/todolists/todolists-api";
+import {tasksAPI} from "features/todolists-list/tasks/tasks-api";
 
 export default {
     title: 'API'
@@ -85,7 +86,7 @@ export const GetTasks = () => {
     const [state, setState] = useState<any>(null)
     const [todoId, setTodoId] = useState<string>('')
     const getTasks = () => {
-        const promise = todolistAPI.getTasks(todoId)
+        const promise = tasksAPI.getTasks(todoId)
         promise.then((res) => {
             setState(res.data)
         })
@@ -107,7 +108,7 @@ export const CreateTask = () => {
     const [title, setTitleTask] = useState<string>('')
 
     const createTask = () => {
-        const promise = todolistAPI.createTask({todolistId, title})
+        const promise = tasksAPI.createTask({todolistId, title})
         promise.then((res) => {
             setState(res.data)
         })
@@ -133,7 +134,7 @@ export const DeleteTask = () => {
     const [taskId, setTaskId] = useState<string>('')
 
     const deleteTask = () => {
-        const promise = todolistAPI.deleteTask({todolistId, taskId})
+        const promise = tasksAPI.deleteTask({todolistId, taskId})
 
         promise.then((res) => {
             setState(res.data)
@@ -177,7 +178,7 @@ export const UpdateTask = () => {
     //input new title
 
     const updateTask = () => {
-        const promise = todolistAPI.changeTask(todolistId, taskId, {
+        const promise = tasksAPI.changeTask(todolistId, taskId, {
             description: "string",
             title: "string",
             status: 0,
