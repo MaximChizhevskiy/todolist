@@ -6,7 +6,6 @@ import {ResponseType} from "common/types";
 
 export const thunkTryCatch = async (thunkAPI: BaseThunkAPI<AppRootStateType, any, AppThunkDispatch, null | ResponseType>, logic: Function) => {
     const {dispatch, rejectWithValue} = thunkAPI
-    dispatch(appActions.setAppStatus({status: 'loading'}))
     try {
         return await logic()
     } catch (e) {

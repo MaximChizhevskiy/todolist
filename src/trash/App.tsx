@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import '../app/App.css'
-import Todolist, {FilterValuesType, TasksStateType} from "../features/todolists-list/todolists/Todolist/Todolist";
+import {FilterValuesType, TasksStateType, Todolist} from "features/todolists-list/todolists/Todolist/Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "common/components";
 import AppBar from '@mui/material/AppBar';
@@ -206,15 +206,8 @@ function App() {
                             return <Grid item>
                                 <Paper style={{padding: '10px'}} elevation={4}>
                                     <Todolist key={todolist.id}
-                                              id={todolist.id}
                                               tasks={tasksForTodolist}
-                                              entityStatus={todolist.entityStatus}
-                                              titleTodolist={todolist.title}
-                                              changeFilter={changeFilter}
-                                              addTask={addTask}
-                                              filter={todolist.filter}
-                                              removeTodolist={removeTodolist}
-                                              changeTitleTodolist={changeTitleTodolist}
+                                              todolist={todolist}
                                     />
                                 </Paper>
                             </Grid>

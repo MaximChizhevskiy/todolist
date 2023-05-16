@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react'
 import '../app/App.css'
-import Todolist, {FilterValuesType} from "../features/todolists-list/todolists/Todolist/Todolist";
+import {FilterValuesType, Todolist} from "features/todolists-list/todolists/Todolist/Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "common/components/AddItemForm/AddItemForm";
 import AppBar from '@mui/material/AppBar';
@@ -193,15 +193,9 @@ function AppWithReducers() {
                             return <Grid item>
                                 <Paper style={{padding: '10px'}} elevation={4}>
                                     <Todolist key={todolist.id}
-                                              id={todolist.id}
                                               tasks={tasksForTodolist}
-                                              titleTodolist={todolist.title}
-                                              entityStatus={todolist.entityStatus}
-                                              changeFilter={changeFilter}
-                                              addTask={addTask}
-                                              filter={todolist.filter}
-                                              removeTodolist={removeTodolist}
-                                              changeTitleTodolist={changeTitleTodolist}
+                                              todolist={todolist}
+
                                     />
                                 </Paper>
                             </Grid>

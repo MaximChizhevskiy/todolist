@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm {...
 export const AddItemFormStory = Template.bind({});
 
 AddItemFormStory.args = {
-  addItem: action('Button inside from clicked')
+  //addItem: action('Button inside from clicked')
 }
 
 const Template1: ComponentStory<typeof AddItemForm> = (args) => {
@@ -63,5 +63,5 @@ const Template1: ComponentStory<typeof AddItemForm> = (args) => {
 export const AddItemFormStoryError = Template1.bind({});
 
 AddItemFormStoryError.args = {
-  addItem: action('Button inside from clicked')
+  //addItem: action('Button inside from clicked')
 }
