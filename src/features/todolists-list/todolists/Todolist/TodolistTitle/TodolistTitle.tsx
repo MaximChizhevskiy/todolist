@@ -1,38 +1,38 @@
-import React, {FC} from 'react';
-import {EditableSpan} from "common/components";
-import {IconButton} from "@mui/material";
-import {Delete} from "@mui/icons-material";
-import {useActions} from "common/hooks";
-import {TodolistDomainType, todolistsThunks} from "features/todolists-list/todolists/todolists-reducer";
+import React, { FC } from "react"
+import { EditableSpan } from "common/components"
+import { IconButton } from "@mui/material"
+import { Delete } from "@mui/icons-material"
+import { useActions } from "common/hooks"
+import { TodolistDomainType, todolistsThunks } from "features/todolists-list/todolists/todolists-reducer"
 
-export const TodolistTitle: FC<Props> = ({todolist}) => {
+export const TodolistTitle: FC<Props> = ({ todolist }) => {
+  const { removeTodolist, changeTodolistTitle } = useActions(todolistsThunks)
 
-    const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
+  const removeTodolistCallback = () => {
+    removeTodolist(todolist.id)
+  }
+  const changeTitleTodolistCallback = (title: string) => {
+    changeTodolistTitle({ todolistId: todolist.id, title })
+  }
 
-    const removeTodolistCallback = () => {
-        removeTodolist(todolist.id)
-    }
-    const changeTitleTodolistCallback = (title: string) => {
-        changeTodolistTitle({todolistId: todolist.id, title})
-    }
+  return (
+    <div>
+      <h3>
+        <EditableSpan
+          titleTask={todolist.title}
+          onChange={changeTitleTodolistCallback}
+          disabled={todolist.entityStatus === "loading"}
+        />
 
-    return (
-        <div>
-            <h3><EditableSpan
-                titleTask={todolist.title}
-                onChange={changeTitleTodolistCallback}
-                disabled={todolist.entityStatus === 'loading'}/>
-
-                <IconButton
-                    onClick={removeTodolistCallback}
-                    disabled={todolist.entityStatus === 'loading'}><Delete
-                    color={"disabled"}/></IconButton>
-            </h3>
-        </div>
-    );
-};
+        <IconButton onClick={removeTodolistCallback} disabled={todolist.entityStatus === "loading"}>
+          <Delete color={"disabled"} />
+        </IconButton>
+      </h3>
+    </div>
+  )
+}
 
 //types
 type Props = {
-    todolist: TodolistDomainType
+  todolist: TodolistDomainType
 }
