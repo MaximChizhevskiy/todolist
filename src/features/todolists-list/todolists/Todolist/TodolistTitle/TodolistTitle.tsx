@@ -16,7 +16,7 @@ export const TodolistTitle: FC<Props> = ({ todolist }) => {
   }
 
   return (
-    <div style={{ position: "relative", padding: "5px" }}>
+    <div style={{ position: "relative", padding: "5px", wordBreak: "break-all", whiteSpace: "normal" }}>
       <h3>
         <EditableSpan
           titleTask={todolist.title}
