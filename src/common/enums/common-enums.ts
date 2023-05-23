@@ -1,19 +1,19 @@
 export enum TaskStatuses {
-    New,
-    InProgress,
-    Completed,
-    Draft
+  New,
+  InProgress,
+  Completed,
+  Draft,
 }
 export enum TaskPriorities {
-    Low,
-    Middle,
-    Hi,
-    Urgently,
-    Later
+  Low,
+  Middle,
+  Hi,
+  Urgently,
+  Later,
 }
 
 export const ResultCode = {
-    Success: 0,
-    Error: 1,
-    Captcha: 10
+  Success: 0,
+  Error: 1,
+  Captcha: 10,
 } as const
