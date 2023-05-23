@@ -38,7 +38,7 @@ export const Task: FC<Props> = ({ todolistId, task }) => {
       <EditableSpan disabled={isDisabled} titleTask={task.title} onChange={onChangeTitleHandler} />
 
       <IconButton onClick={onRemoveClickHandler} disabled={isDisabled}>
-        <Delete color={"disabled"} />
+        <Delete color={"disabled"} style={{ position: "absolute", top: "-5px", left: "130px" }} />
       </IconButton>
     </li>
   )

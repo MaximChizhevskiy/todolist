@@ -37,13 +37,16 @@ const TodolistsList: React.FC = () => {
       <Grid container style={{ padding: "20px" }}>
         <AddItemForm addItem={addTodolist} />
       </Grid>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} style={{ flexWrap: "nowrap", overflowX: "scroll" }}>
         {todolists.map((todolist) => {
           let tasksForTodolist = tasks[todolist.id]
 
           return (
             <Grid item key={todolist.id}>
-              <Paper style={{ padding: "10px" }} elevation={4}>
+              <Paper
+                style={{ width: "280px", padding: "10px", marginRight: "5px", marginBottom: "10px" }}
+                elevation={4}
+              >
                 <Todolist key={todolist.id} tasks={tasksForTodolist} todolist={todolist} />
               </Paper>
             </Grid>

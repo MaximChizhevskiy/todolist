@@ -22,6 +22,7 @@ export const Tasks: FC<Props> = ({ todolist, tasks }) => {
       {tasksForTodolist.map((task) => (
         <Task key={task.id} task={task} todolistId={todolist.id} entityStatus={todolist.entityStatus} />
       ))}
+      {!tasksForTodolist.length && <div style={{ padding: "5px", color: "grey" }}>Create your first task</div>}
     </div>
   )
 }

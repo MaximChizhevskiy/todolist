@@ -16,7 +16,7 @@ export const TodolistTitle: FC<Props> = ({ todolist }) => {
   }
 
   return (
-    <div>
+    <div style={{ position: "relative", padding: "5px" }}>
       <h3>
         <EditableSpan
           titleTask={todolist.title}
@@ -24,7 +24,11 @@ export const TodolistTitle: FC<Props> = ({ todolist }) => {
           disabled={todolist.entityStatus === "loading"}
         />
 
-        <IconButton onClick={removeTodolistCallback} disabled={todolist.entityStatus === "loading"}>
+        <IconButton
+          onClick={removeTodolistCallback}
+          disabled={todolist.entityStatus === "loading"}
+          style={{ position: "absolute", top: "-15px", right: "1px" }}
+        >
           <Delete color={"disabled"} />
         </IconButton>
       </h3>

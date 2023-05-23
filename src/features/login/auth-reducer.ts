@@ -46,7 +46,7 @@ export const initializeApp = createAppAsyncThunk<{ isLoggedIn: boolean }, void>(
       if (res.resultCode === ResultCode.Success) {
         return { isLoggedIn: true }
       } else {
-        return rejectWithValue({ data: res, showGlobalError: true })
+        return rejectWithValue({ data: res, showGlobalError: false })
       }
     } finally {
       dispatch(appActions.setAppStatus({ status: "succeeded" }))

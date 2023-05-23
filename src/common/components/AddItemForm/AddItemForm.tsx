@@ -29,7 +29,7 @@ export const AddItemForm: React.FC<Props> = memo((props: Props) => {
           }
         })
     } else {
-      setError("Title is required")
+      setError("Error!")
     }
   }
 
