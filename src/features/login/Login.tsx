@@ -16,7 +16,7 @@ import s from "./style.module.css"
 import { ResponseType } from "common/types"
 import { authThunks } from "features/login/auth-reducer"
 
-export const Login = () => {
+export const Login: React.FC = () => {
   const { logIn } = useActions(authThunks)
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn)

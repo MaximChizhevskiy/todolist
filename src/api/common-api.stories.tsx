@@ -6,11 +6,13 @@ export default {
   title: "API",
 }
 
+//для проверки историй нужно залогиниться (Login)
 export const GetTodolists = () => {
   const [state, setState] = useState<any>(null)
   useEffect(() => {
     // здесь мы будем делать запрос (вынесли в api ts) и ответ закидывать в стейт.
     // который в виде строки будем отображать в div-ке
+
     const promise = todolistAPI.getTodolists()
 
     promise.then((res) => {
@@ -215,11 +217,6 @@ export const UpdateTask = () => {
     if (todolistId) {
     }
   }, [todolistId])
-  //get todolists => render
-
-  //get tasks for Todolist => render
-
-  //input new title
 
   const updateTask = () => {
     const promise = tasksAPI.changeTask(todolistId, taskId, {
@@ -262,11 +259,7 @@ export const UpdateTask = () => {
         />
         <button onClick={updateTask}>Update Task</button>
       </div>
-      {/*<div>
-            {stateIDsTodolists.map((el: any) => <button onClick={() =>{
-                setTodoId(el)
-            } }>{el}</button>)}
-        </div>*/}
+      <div></div>
     </div>
   )
 }

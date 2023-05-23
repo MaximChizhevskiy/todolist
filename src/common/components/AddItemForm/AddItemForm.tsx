@@ -1,12 +1,7 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react"
+import React, { memo, ChangeEvent, KeyboardEvent, useState } from "react"
 import { IconButton, TextField } from "@mui/material"
 import { AddBox } from "@mui/icons-material"
 import { RejectValueType } from "common/utils/create-app-async-thunk"
-
-type Props = {
-  addItem: (titleTodolist: string) => any //Promise<any>
-  disabled?: boolean
-}
 
 const addButtonStyles = {
   maxWidth: "30px",
@@ -16,7 +11,7 @@ const addButtonStyles = {
 }
 
 //Функция добавления тудулиста
-export const AddItemForm = React.memo((props: Props) => {
+export const AddItemForm: React.FC<Props> = memo((props: Props) => {
   let [titleTask, setTitleTask] = useState("")
   let [error, setError] = useState<string | null>(null)
 
@@ -71,3 +66,9 @@ export const AddItemForm = React.memo((props: Props) => {
     </div>
   )
 })
+
+//types
+type Props = {
+  addItem: (titleTodolist: string) => Promise<any>
+  disabled?: boolean
+}

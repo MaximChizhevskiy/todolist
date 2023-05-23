@@ -9,12 +9,6 @@ import { useActions } from "common/hooks"
 import { tasksThunks } from "features/todolists-list/tasks/tasks-reducer"
 import s from "features/todolists-list/todolists/Todolist/Tasks/Task/styles.module.css"
 
-type Props = {
-  task: TaskType
-  todolistId: string
-  entityStatus: RequestStatusType
-}
-
 export const Task: FC<Props> = ({ todolistId, task }) => {
   const [isDisabled, setIsDisable] = useState(false)
   const { removeTaskTC: removeTask, changeTaskTC: changeTask } = useActions(tasksThunks)
@@ -48,4 +42,11 @@ export const Task: FC<Props> = ({ todolistId, task }) => {
       </IconButton>
     </li>
   )
+}
+
+//types
+type Props = {
+  task: TaskType
+  todolistId: string
+  entityStatus: RequestStatusType
 }

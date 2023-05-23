@@ -1,15 +1,17 @@
 import React from "react"
 import { Meta, StoryFn } from "@storybook/react"
-import App from "./App"
+import { Login } from "features/login/Login"
 import { ReduxStoreProviderDecorator } from "stories/decorators/ReduxStoreProviderDecorator"
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "TODOLISTS/App",
-  component: App,
+  title: "TODOLISTS/Login",
+  component: Login,
   decorators: [ReduxStoreProviderDecorator],
-} as Meta<typeof App>
+} as Meta<typeof Login>
 
-const Template: StoryFn<typeof App> = () => <App />
+const Template: StoryFn<typeof Login> = (args) => <Login {...args} />
 
-export const AppBaseExample = Template.bind({})
+export const LoginStory = Template.bind({})
+
+LoginStory.args = {}

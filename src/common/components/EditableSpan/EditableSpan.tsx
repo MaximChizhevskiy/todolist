@@ -1,14 +1,8 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react"
+import React, { memo, ChangeEvent, KeyboardEvent, useState } from "react"
 import { TextField } from "@mui/material"
 
-type EditableSpanPropsType = {
-  titleTask: string
-  onChange: (newValue: string) => void
-  disabled?: boolean
-}
-
 // Функция редактирования тайтла
-export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
+export const EditableSpan: React.FC<Props> = memo((props: Props) => {
   let [editMode, setEditMode] = useState(false)
   let [editableTitleTask, setEditableTitleTask] = useState(props.titleTask)
 
@@ -43,3 +37,10 @@ export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
     <span onDoubleClick={activateEditMode}>{props.titleTask}</span>
   )
 })
+
+//types
+type Props = {
+  titleTask: string
+  onChange: (newValue: string) => void
+  disabled?: boolean
+}
