@@ -28,18 +28,20 @@ export const Task: FC<Props> = ({ todolistId, task }) => {
   }
   return (
     <li key={task.id} className={task.status === TaskStatuses.Completed ? s.isDone : "notIsDone"}>
-      <Checkbox
-        disabled={isDisabled}
-        color={"primary"}
-        checked={task.status === TaskStatuses.Completed}
-        onChange={onChangeTaskStatusHandler}
-      />
-
-      <EditableSpan disabled={isDisabled} titleTask={task.title} onChange={onChangeTitleHandler} />
-
-      <IconButton onClick={onRemoveClickHandler} disabled={isDisabled}>
-        <Delete color={"disabled"} style={{ position: "absolute", top: "-5px", left: "130px" }} />
-      </IconButton>
+      <div className={s.task}>
+        <div className={s.checkAndTitle}>
+          <Checkbox
+            disabled={isDisabled}
+            color={"primary"}
+            checked={task.status === TaskStatuses.Completed}
+            onChange={onChangeTaskStatusHandler}
+          />
+          <EditableSpan disabled={isDisabled} titleTask={task.title} onChange={onChangeTitleHandler} />
+        </div>
+        <IconButton onClick={onRemoveClickHandler} disabled={isDisabled}>
+          <Delete color={"disabled"} className={s.deleteButton} />
+        </IconButton>
+      </div>
     </li>
   )
 }

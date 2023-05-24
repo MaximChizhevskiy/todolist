@@ -4,6 +4,7 @@ import { IconButton } from "@mui/material"
 import { Delete } from "@mui/icons-material"
 import { useActions } from "common/hooks"
 import { TodolistDomainType, todolistsThunks } from "features/todolists-list/todolists/todolists-reducer"
+import s from "./styles.module.css"
 
 export const TodolistTitle: FC<Props> = ({ todolist }) => {
   const { removeTodolist, changeTodolistTitle } = useActions(todolistsThunks)
@@ -16,7 +17,7 @@ export const TodolistTitle: FC<Props> = ({ todolist }) => {
   }
 
   return (
-    <div style={{ position: "relative", padding: "5px", wordBreak: "break-all", whiteSpace: "normal" }}>
+    <div className={s.todolistTitle}>
       <h3>
         <EditableSpan
           titleTask={todolist.title}

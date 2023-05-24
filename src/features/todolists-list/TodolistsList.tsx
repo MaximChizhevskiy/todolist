@@ -9,6 +9,7 @@ import { useActions } from "common/hooks"
 import { selectTasks } from "features/todolists-list/tasks/tasks-selectors"
 import { selectIsLoggedIn } from "features/login/auth-selectors"
 import { selectTodolists } from "features/todolists-list/todolists/todolists-selectors"
+import s from "./styles.module.css"
 
 const TodolistsList: React.FC = () => {
   const todolists = useAppSelector<Array<TodolistDomainType>>(selectTodolists)
@@ -43,10 +44,7 @@ const TodolistsList: React.FC = () => {
 
           return (
             <Grid item key={todolist.id}>
-              <Paper
-                style={{ width: "280px", padding: "10px", marginRight: "5px", marginBottom: "10px" }}
-                elevation={4}
-              >
+              <Paper className={s.paper} elevation={4}>
                 <Todolist key={todolist.id} tasks={tasksForTodolist} todolist={todolist} />
               </Paper>
             </Grid>

@@ -58,7 +58,7 @@ export const Login: React.FC = () => {
   })
 
   if (isLoggedIn) {
-    return <Navigate to={"/"} />
+    return <Navigate to={"/todolist-list"} />
   }
 
   return (

@@ -1,3 +1,23 @@
 .isDone {
   opacity: 0.5;
 }
+
+.task{
+    display: flex;
+    justify-content: space-between;
+    white-space: normal;
+    padding-left: 10px;
+}
+
+.task::before {
+
+    width: 15px; /* Ширина отступа */
+}
+
+.checkAndTitle {
+
+}
+
+.deleteButton {
+align-items: flex-end;
+}
