@@ -56,11 +56,12 @@ function App() {
       </AppBar>
       <Container fixed>
         <Routes>
-          <Route path={"login"} element={<Login />} />
+          <Route path={"/login"} element={<Login />} />
           <Route path={"/todolist-list"} element={<TodolistsList />} />
-          <Route path={"todolist"} element={<TodolistsList />} />
-          <Route path={"404"} element={<h1 style={{ textAlign: "center" }}>404: PAGE NOT FOUND</h1>} />
-          <Route path="*" element={<Navigate to={"404"} />} />
+          <Route path={"/todolist"} element={<TodolistsList />} />
+          <Route path={"/"} element={<TodolistsList />} />
+          <Route path={"/404"} element={<h1 style={{ textAlign: "center" }}>404: PAGE NOT FOUND</h1>} />
+          <Route path="*" element={<Navigate to={"/404"} />} />
         </Routes>
       </Container>
       <ErrorSnackbar />

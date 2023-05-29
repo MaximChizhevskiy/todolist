@@ -2,4 +2,5 @@
   position: relative;
   padding: 5px;
   white-space: normal;
+  word-break: break-all;
 }
